@@ -6,19 +6,30 @@ Fecha de creación: 20 febrero, 2018
 Última modificación: 1 marzo, 2018
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <conio.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<conio.h>
 
 void dibujarMarco();
 void dibujarMarco2();
 
 
+
+struct empleado {
+		char nombreApellidos[50], direccion[60], area[30];
+		int claveEmpleado;
+		float sueldoDiario;
+	} empleados[2]; // para pruebas, despues cambiar a 10
+
+
+
 int main () {
 	
 	system ("color 0a");
-	int select1, select2, select3;
+	int select1, select2, select3, i, contador=0, clave;
 	
+		
 	do {
 	system ("cls");
 		 
@@ -59,12 +70,49 @@ int main () {
 			switch (select2) {
 				case 1:
 					system("cls");
-					dibujarMarco2();
-					gotoxy(25,3); printf("RobleSys, S.A. de C.V.");
-					gotoxy(15,5); printf("Programa para el registro de empleados");
-					highvideo();textbackground(GREEN);
-					gotoxy(25,8);  printf("Captura de datos\n\n");
-					lowvideo();textbackground(BLACK);
+					
+					
+					
+					for (i=0; i<2; i++){ //para pruebas 2, despues cambiar a 10
+					
+					do {
+						system("cls");
+						dibujarMarco2();
+						gotoxy(25,2); printf("RobleSys, S.A. de C.V.");
+						gotoxy(15,3); printf("Programa para el registro de empleados");
+						highvideo();textbackground(GREEN);
+						gotoxy(25,5);  printf("Captura de datos\n\n");
+						lowvideo();textbackground(BLACK);
+						
+						
+						
+						printf("\nIngresar clave de empleado, 4 digitos: ");
+						scanf("%i",&clave);
+					
+					}
+					
+					while (clave<999 || clave>9999); 	
+					empleados[i].claveEmpleado = clave;
+					printf("\nIngresar nombre completo del empleado #%i: ",i+1);
+					fflush(stdin);
+					gets(empleados[i].nombreApellidos);
+					printf("\nIngresar direccion del empleado: \n");
+					gets(empleados[i].direccion);
+					printf("\nDireccion en la que labora: ");
+					printf("\n1) Administracion");
+					printf("\n2) Finanzas");
+					printf("\n3) Recursos Humanos");
+					printf("\n4) Almacen");
+					printf("\n5) Ventas");
+					printf("\nSeleccione una opcion: ");
+					printf("\nIngresar sueldo diario: ");
+					scanf("%f",&empleados[i].sueldoDiario);
+					
+					}	
+					
+						
+					
+					printf("\n\n");
 					system ("pause");
 				break;
 				case 2:
@@ -99,6 +147,11 @@ int main () {
 					highvideo();textbackground(GREEN);
 					gotoxy(25,8);  printf("Consulta de datos\n\n");
 					lowvideo();textbackground(BLACK);
+					
+					
+					
+					
+					
 					system ("pause");
 				break;
 				case 2:
