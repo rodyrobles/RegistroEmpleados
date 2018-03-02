@@ -3,7 +3,7 @@ Programa: menuRegistroEmpleadosV1.0.c
 Programador: Rodolfo Gutierrez Robles
 Descripción: programa para el registro de empleados 
 Fecha de creación: 20 febrero, 2018
-Última modificación: 1 marzo, 2018
+Última modificación: 2 marzo, 2018
 */
 
 #include<stdio.h>
@@ -15,7 +15,6 @@ void dibujarMarco();
 void dibujarMarco2();
 
 
-
 struct empleado {
 		char nombreApellidos[50], direccion[60], area[30];
 		int claveEmpleado;
@@ -23,13 +22,11 @@ struct empleado {
 	} empleados[2]; // OJO solo para pruebas, despues cambiar a 10
 
 
-
 int main () {
 	
 	system ("color 0a");
-	int select1, select2, select3, opc, i, contador=0, clave;
-	
-		
+	int select1, select2, select3, opc, i=0, indice=0, clave;
+
 	do {
 	system ("cls");
 		 
@@ -71,13 +68,11 @@ int main () {
 				case 1:
 					system("cls");
 					
-					if (contador>=2) printf("\n\tEl registro de empleados esta completo");
+					if (indice>=2) 
+						printf("\n\tEl registro de empleados esta completo");
 					
 					else {
-					
-					///
-					for (i=0; i<2; i++){ //para pruebas 2, despues cambiar a 10
-					
+														
 					do {
 						system("cls");
 						dibujarMarco2();
@@ -86,21 +81,20 @@ int main () {
 						highvideo();textbackground(GREEN);
 						gotoxy(25,5);  printf("Captura de datos\n\n");
 						lowvideo();textbackground(BLACK);
-						
-						
-						
+																		
 						printf("\nIngresar clave de empleado, 4 digitos: ");
 						scanf("%i",&clave);
 					
 					}
 					
 					while (clave<999 || clave>9999); 	
-					empleados[i].claveEmpleado = clave;
-					printf("\nIngresar nombre completo del empleado #%i: ",i+1);
+					
+					empleados[indice].claveEmpleado = clave;
+					printf("\nIngresar nombre completo del empleado #%i: ",indice+1);
 					fflush(stdin);
-					gets(empleados[i].nombreApellidos);
+					gets(empleados[indice].nombreApellidos);
 					printf("\nIngresar direccion del empleado: \n");
-					gets(empleados[i].direccion);
+					gets(empleados[indice].direccion);
 					printf("\nDireccion en la que labora: ");
 					printf("\n1) Administracion");
 					printf("\n2) Finanzas");
@@ -113,31 +107,28 @@ int main () {
 					
 					switch(opc){
 						case 1:
-							strcpy(empleados[i].area, "Administracion" );
+							strcpy(empleados[indice].area, "Administracion" );
 							break;
 						case 2:
-							strcpy(empleados[i].area, "Finanzas" );
+							strcpy(empleados[indice].area, "Finanzas" );
 							break;
 						case 3:
-							strcpy(empleados[i].area, "Recursos Humanos" );
+							strcpy(empleados[indice].area, "Recursos Humanos" );
 							break;
 						case 4:
-							strcpy(empleados[i].area, "Almacen" );
+							strcpy(empleados[indice].area, "Almacen" );
 							break;
 						case 5:
-							strcpy(empleados[i].area, "Ventas" );
+							strcpy(empleados[indice].area, "Ventas" );
 							break;
-													
 					}
-						
-										
+															
 					printf("\nIngresar sueldo diario: ");
-					scanf("%f",&empleados[i].sueldoDiario);
-					contador++;
-					}	
-					
+					scanf("%f",&empleados[indice].sueldoDiario);
+					indice++;
+								
 					}
-					///	
+					
 					
 					printf("\n\n");
 					system ("pause");
@@ -196,7 +187,6 @@ int main () {
 }
 
 
-
 		
 	void dibujarMarco() {
 	
@@ -204,7 +194,6 @@ int main () {
 	//inicio dibujo de marco
 	gotoxy(1,1); printf("%c",201); 		//esq sup izq    
   	
-  	  	
 	int i; 					//borde superior
 	gotoxy(2,1);
 	
@@ -221,7 +210,6 @@ int main () {
 	
 	gotoxy(70,1);	printf("%c",187);		//esq sup der
 	 		
-	
 	int xVd=70, yVd=2;		//vertical derecha
 	int k;					
 	for (k=0; k<15; k++){
@@ -237,7 +225,6 @@ int main () {
 	
 	gotoxy(1,16);	printf("%c",200);		//esq inf izq
 	
-	
 	gotoxy(2,16);  			//borde inferior
 	int m;
 	for (m=0; m<68; m++)
@@ -246,7 +233,6 @@ int main () {
 	gotoxy(70,16);	printf("%c",188);		//esq inf der
 	
 	//fin dibujo de marco
-
 }
 
 
