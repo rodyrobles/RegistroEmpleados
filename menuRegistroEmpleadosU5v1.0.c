@@ -27,7 +27,7 @@ struct empleado {
 int main () {
 	
 	system ("color 0a");
-	int select1, select2, select3, i, contador=0, clave;
+	int select1, select2, select3, opc, i, contador=0, clave;
 	
 		
 	do {
@@ -107,7 +107,30 @@ int main () {
 					printf("\n3) Recursos Humanos");
 					printf("\n4) Almacen");
 					printf("\n5) Ventas");
+													
 					printf("\nSeleccione una opcion: ");
+					scanf("%i", &opc);
+					
+					switch(opc){
+						case 1:
+							strcpy(empleados[i].area, "Administracion" );
+							break;
+						case 2:
+							strcpy(empleados[i].area, "Finanzas" );
+							break;
+						case 3:
+							strcpy(empleados[i].area, "Recursos Humanos" );
+							break;
+						case 4:
+							strcpy(empleados[i].area, "Almacen" );
+							break;
+						case 5:
+							strcpy(empleados[i].area, "Ventas" );
+							break;
+													
+					}
+						
+										
 					printf("\nIngresar sueldo diario: ");
 					scanf("%f",&empleados[i].sueldoDiario);
 					contador++;
