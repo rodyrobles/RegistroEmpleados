@@ -20,7 +20,7 @@ struct empleado {
 		char nombreApellidos[50], direccion[60], area[30];
 		int claveEmpleado;
 		float sueldoDiario;
-	} empleados[2]; // para pruebas, despues cambiar a 10
+	} empleados[2]; // OJO solo para pruebas, despues cambiar a 10
 
 
 
@@ -71,8 +71,11 @@ int main () {
 				case 1:
 					system("cls");
 					
+					if (contador>=2) printf("\n\tEl registro de empleados esta completo");
 					
+					else {
 					
+					///
 					for (i=0; i<2; i++){ //para pruebas 2, despues cambiar a 10
 					
 					do {
@@ -107,10 +110,11 @@ int main () {
 					printf("\nSeleccione una opcion: ");
 					printf("\nIngresar sueldo diario: ");
 					scanf("%f",&empleados[i].sueldoDiario);
-					
+					contador++;
 					}	
 					
-						
+					}
+					///	
 					
 					printf("\n\n");
 					system ("pause");
@@ -142,12 +146,12 @@ int main () {
 				case 1:
 					system("cls");
 					dibujarMarco2();
-					gotoxy(25,3); printf("RobleSys, S.A. de C.V.");
-					gotoxy(15,5); printf("Programa para el registro de empleados");
+					gotoxy(25,2); printf("RobleSys, S.A. de C.V.");
+					gotoxy(15,3); printf("Programa para el registro de empleados");
 					highvideo();textbackground(GREEN);
-					gotoxy(25,8);  printf("Consulta de datos\n\n");
+					gotoxy(25,5);  printf("Consulta de datos\n\n");
 					lowvideo();textbackground(BLACK);
-					
+					printf(". . . En construccion  ");
 					
 					
 					
