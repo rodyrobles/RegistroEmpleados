@@ -14,24 +14,21 @@ Fecha de creación: 20 febrero, 2018
 void dibujarMarco();
 void dibujarMarco2();
 
-
 struct empleado {
-		char nombreApellidos[50], direccion[60], area[30];
+		char nombreApellidos[50], direccion[80], area[30];
 		int claveEmpleado;
 		float sueldoDiario;
-	} empleados[2]; // OJO solo para pruebas, despues cambiar a 10
-
+	} empleados[10]; 
 
 int main () {
 	
 	system ("color 0a");
-	int select1, select2, select3, opc, i=0, indice=0, clave;
+	int select1, select2, select3, opc, i=0, indice=0, cicloClave=1, clave;
 
 	do {
 	system ("cls");
-		 
 	dibujarMarco();
-	
+
 	gotoxy(25,3); printf("RobleSys, S.A. de C.V.");
 	gotoxy(15,5); printf("Programa para el registro de empleados");
 	highvideo();textbackground(GREEN);
@@ -48,7 +45,6 @@ int main () {
 				
 		case 1:
 			do {
-			
 			system("cls");
 						
 			dibujarMarco();
@@ -61,18 +57,17 @@ int main () {
 			gotoxy(5,10); printf("1. Captura de datos");
 			gotoxy(5,11); printf("2. Regresar al menu principal");
 			gotoxy(5,14); printf("Selecciona opcion: ");
-						
 			scanf("%d", &select2);
 			
 			switch (select2) {
 				case 1:
 					system("cls");
 					
-					if (indice>=2) 
-						printf("\n\tEl registro de empleados esta completo");
+					if (indice>=10) 
+						printf("\n\tEl registro de empleados esta completo!");
 					
 					else {
-														
+
 					do {
 						system("cls");
 						dibujarMarco2();
@@ -82,12 +77,16 @@ int main () {
 						gotoxy(25,5);  printf("Captura de datos\n\n");
 						lowvideo();textbackground(BLACK);
 																		
-						printf("\nIngresar clave de empleado, 4 digitos: ");
+						printf("\nIngresar clave de empleado: ");
 						scanf("%i",&clave);
-					
-					}
-					
-					while (clave<999 || clave>9999); 	
+						
+						if (clave<1000 || clave>9999) {
+							printf("clave no valida\n");
+		        			system("pause");
+						}else {
+	    					cicloClave=0;
+	    				}
+					} while (cicloClave==1);
 					
 					empleados[indice].claveEmpleado = clave;
 					printf("\nIngresar nombre completo del empleado #%i: ",indice+1);
@@ -96,12 +95,11 @@ int main () {
 					printf("\nIngresar direccion del empleado: \n");
 					gets(empleados[indice].direccion);
 					printf("\nDireccion en la que labora: ");
-					printf("\n1) Administracion");
-					printf("\n2) Finanzas");
-					printf("\n3) Recursos Humanos");
-					printf("\n4) Almacen");
-					printf("\n5) Ventas");
-													
+					printf("\n 1) Administracion");
+					printf("\n 2) Finanzas");
+					printf("\n 3) Recursos Humanos");
+					printf("\n 4) Almacen");
+					printf("\n 5) Ventas");
 					printf("\nSeleccione una opcion: ");
 					scanf("%i", &opc);
 					
@@ -122,13 +120,10 @@ int main () {
 							strcpy(empleados[indice].area, "Ventas" );
 							break;
 					}
-															
 					printf("\nIngresar sueldo diario: ");
 					scanf("%f",&empleados[indice].sueldoDiario);
 					indice++;
-								
 					}
-					
 					
 					printf("\n\n");
 					system ("pause");
@@ -142,7 +137,6 @@ int main () {
 		case 2: 
 			do {
 			system("cls");
-			
 			dibujarMarco();
 			
 			gotoxy(25,3); printf("RobleSys, S.A. de C.V.");
@@ -153,7 +147,6 @@ int main () {
 			gotoxy(5,10); printf("1. Consulta de datos");
 			gotoxy(5,11); printf("2. Regresar al menu principal");
 			gotoxy(5,14); printf("Selecciona opcion: ");
-						
 			scanf("%d", &select3);
 						
 			switch (select3) {
@@ -166,10 +159,6 @@ int main () {
 					gotoxy(25,5);  printf("Consulta de datos\n\n");
 					lowvideo();textbackground(BLACK);
 					printf(". . . En construccion  ");
-					
-					
-					
-					
 					system ("pause");
 				break;
 				case 2:
@@ -181,15 +170,12 @@ int main () {
 	
 	 }while (select1!=3);
 	
-	printf("\n\n\n");
+	printf("\n\n\n\n");
 	system ("pause");
 	return 0;
 }
 
-
-		
 	void dibujarMarco() {
-	
 	system ("color 0a");
 	//inicio dibujo de marco
 	gotoxy(1,1); printf("%c",201); 		//esq sup izq    
@@ -231,13 +217,11 @@ int main () {
 	printf("%c",205); 
 	
 	gotoxy(70,16);	printf("%c",188);		//esq inf der
-	
 	//fin dibujo de marco
 }
 
 
 void dibujarMarco2() {
-	
 	system ("color 0a");
 	//inicio dibujo de marco
 	gotoxy(1,1); printf("%c",201); 		//esq sup izq    
@@ -273,7 +257,6 @@ void dibujarMarco2() {
 	int l;
 	for (l=0; l<68; l++)
 	printf("%c",205);  
-	
 	//fin dibujo de marco2
 }
 
