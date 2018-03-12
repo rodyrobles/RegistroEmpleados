@@ -24,13 +24,14 @@ struct empleado {
 int main () {
 	
 	lowvideo();textbackground(BLACK);
-	int select1, select2, select3, opc, i=0, registro=0, cicloClaveEmp, claveEmp, claveAcceso, cicloClaveAcceso;
-	
+	int a, d, select1, select2, select3, opc, i=0, registro=0, cicloClaveEmp, claveEmp, claveAcceso, cicloClaveAcceso,
+	controlCiclo;
+	char validaNombre[50];
 	    
     cicloClaveAcceso=0;
     do {													
 		
-		printf("\nIngresar clave de Acceso: ");
+		printf("\nIngresar clave de Acceso, 5 digitos: ");
 		scanf("%i",&claveAcceso);
 		
 		if (claveAcceso<10000 || claveAcceso>99999) {
@@ -47,8 +48,7 @@ int main () {
 		system ("cls");
 		dibujarMarco();
 	
-		irMenuPrincipal();
-		
+				
 		gotoxy(25,3); printf("RobleSys, S.A. de C.V.");
 		gotoxy(15,5); printf("Programa para el registro de empleados");
 		highvideo();textbackground(GREEN);
@@ -99,7 +99,7 @@ int main () {
 						
 						do {													
 							cicloClaveEmp=0;
-							printf("\nIngresar clave de empleado: ");
+							printf("\nIngresar clave de empleado, 4 digitos: ");
 							scanf("%i",&claveEmp);
 							
 							if (claveEmp<1000 || claveEmp>9999) {
@@ -115,11 +115,54 @@ int main () {
 						} while (cicloClaveEmp==0);
 						
 						empleados[registro].claveEmpleado = claveEmp;
-						printf("\nIngresar nombre completo del empleado #%i: ",registro+1);
-						fflush(stdin);
-						gets(empleados[registro].nombreApellidos);
+						
+						
+						//-----Valida de nombre inicio-----
+						do {
+							controlCiclo=0;
+							
+							printf("\nIngresar nombre completo del empleado #%i: ",registro+1);
+							fflush(stdin); //limpia buffer del teclado
+							gets(validaNombre);
+							a=0;
+							d=0;
+													
+						for (i=0; validaNombre[i]; i++) {
+							if (validaNombre[i]>='a' && validaNombre[i]<='z' || validaNombre[i]>='A' && validaNombre[i]<='Z') {
+								a=1;
+							}
+									
+							if  (validaNombre[i]>='0' && validaNombre[i]<='9') {
+								d=1;
+							}
+						}
+									
+							if (d==1) {
+								lowvideo();textbackground(RED);
+								printf("- Error! Ingrese unicamente letras -\n");
+								lowvideo();textbackground(BLACK);
+							}
+							
+							if (a==1 && d==0)
+							{
+								strcpy(empleados[registro].nombreApellidos,validaNombre);
+								controlCiclo=1;
+								
+							}
+						} while (controlCiclo==0);
+						//-----Valida de nombre fin-----
+						
+						
+						
+						
 						printf("\nIngresar direccion del empleado: \n");
 						gets(empleados[registro].direccion);
+						
+						//-----valida ingreso numeros 1 al 5 inicio-----
+						
+						do {													
+							controlCiclo=0;
+						
 						printf("\nDireccion en la que labora: ");
 						printf("\n 1) Administracion");
 						printf("\n 2) Finanzas");
@@ -129,26 +172,59 @@ int main () {
 						printf("\nSeleccione una opcion: ");
 						scanf("%i", &opc);
 						
-						switch(opc){
-							case 1:
-								strcpy(empleados[registro].area, "Administracion" );
-								break;
-							case 2:
-								strcpy(empleados[registro].area, "Finanzas" );
-								break;
-							case 3:
-								strcpy(empleados[registro].area, "Recursos Humanos" );
-								break;
-							case 4:
-								strcpy(empleados[registro].area, "Almacen" );
-								break;
-							case 5:
-								strcpy(empleados[registro].area, "Ventas" );
-								break;
-						}
-						printf("\nIngresar sueldo diario: ");
-						scanf("%f",&empleados[registro].sueldoDiario);
+						if (opc!=1 && opc<1 || opc>5 )  {
+								lowvideo();textbackground(RED);
+								printf("- Error! Ingrese unicamente numeros del 1 al 5 -\n");
+								lowvideo();textbackground(BLACK);
+								while (getchar() != '\n');
+							
+							}else {
+								
+								switch(opc){
+								case 1:
+									strcpy(empleados[registro].area, "Administracion" );
+									break;
+								case 2:
+									strcpy(empleados[registro].area, "Finanzas" );
+									break;
+								case 3:
+									strcpy(empleados[registro].area, "Recursos Humanos" );
+									break;
+								case 4:
+									strcpy(empleados[registro].area, "Almacen" );
+									break;
+								case 5:
+									strcpy(empleados[registro].area, "Ventas" );
+									break;
+								}
+								controlCiclo=1;
+							}
+						
+						} while (controlCiclo==0);
+						
+						
+						
+						//-----valida ingreso sueldo diario inicio-----
+						do {
+							controlCiclo=0;
+							printf("\nIngresar sueldo diario: ");
+															
+							if (scanf("%f",&empleados[registro].sueldoDiario)!=1) {
+								lowvideo();textbackground(RED);
+								printf("- Error! Ingrese unicamente numeros -\n");
+								lowvideo();textbackground(BLACK);
+								while (getchar() != '\n');
+							
+							}else {
+								controlCiclo=1;
+								
+							}
+						
+						} while (controlCiclo==0);						
+						//-----valida ingreso sueldo diario fin-----
+						
 						registro++;
+												
 						}
 						printf("\nRegistro exitoso!");
 						printf("\n\n");
